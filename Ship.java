@@ -4,7 +4,9 @@ public class Ship {
   private ShipTypes shipType; 
   private boolean isFloating;
   private int shipLength;
-  
+  private String shipIcon;
+  private int shipHealth;
+    
   public static int getShipLengthOfType(ShipTypes shipType) {
     switch (shipType) {
       case CARRIER:
@@ -19,6 +21,23 @@ public class Ship {
         return 2;
       default:
         return 0;
+    }
+  }
+
+  public String getShipIconOfType(ShipTypes shipType) {
+    switch (shipType) {
+      case CARRIER:
+        return "🚢";
+      case BATTLESHIP:
+        return "🔫";
+      case CRUISER:
+        return "🛥️";
+      case SUBMARINE:
+        return "🔱";
+      case DESTROYER:
+        return "⛵";
+      default:
+        return "❓";
     }
   }
 
@@ -37,12 +56,19 @@ public class Ship {
     this.player = player;
     this.shipType = shipType;
     this.isFloating = true;
-
+    
     //converts ENUM value of shipType into a length
     this.shipLength = getShipLengthOfType(shipType);
+    this.shipIcon = getShipIconOfType(shipType);
+
+    this.shipHealth = this.shipLength;
   }
 
   public Coord[] getCoordList() {
     return coordList;
+  }
+
+  public String toString() {
+    return this.shipIcon;
   }
 }

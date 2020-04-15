@@ -9,25 +9,37 @@ public class Tile {
     this.tileCoord = new Coord(x, y);
   }
 
-  public String toString() {
-    if (isBlasted && shipPresent != null) {
-      return "💥";
-    }
-    else if (isBlasted && shipPresent == null) {
-      return "🌀";
-    }
-    else if (!isBlasted && shipPresent != null) {
-      return "🚢";
+  public static int convertColumnLetter(char c) {
+    return (int)c - 65;
+  }
+
+  public String toIcon(boolean isGuessGrid) {
+    
+    if (isBlasted) {
+      if (shipPresent != null) {
+        return "💥";
+      }
+      else {
+        return "🌀";
+      }
     }
     else {
-      return "🌊";
+      if (shipPresent != null && !isGuessGrid) {
+        return shipPresent.toString();
+      }
+      else {
+        return "🌊";      
+      }
     }
   }
+
 
   public void resetTile() {
     this.shipPresent = null;
     this.isBlasted = false;
   }
 
-
+  public void setShipPresent(Ship s) {
+    shipPresent = s;
+  }
 }

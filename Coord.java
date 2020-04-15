@@ -33,19 +33,19 @@ public class Coord {
 
   public int getDistance(Coord c) {
     if (this.isHorizontal(c)) {
-      return Math.abs(this.getY() - c.getY()) + 1;
+      return Math.abs(this.getX() - c.getX()) + 1;
     }
     else {
-      return Math.abs(this.getX() - c.getX()) + 1;
+      return Math.abs(this.getY() - c.getY()) + 1;
     }
   }
 
   public boolean isHorizontal(Coord c) {
     if (this.getX() == c.getX()) {
-      return true;
+      return false;
     }
     else {
-      return false;
+      return true;
     }
   }
 
@@ -61,7 +61,7 @@ public class Coord {
     int startPoint = -1;
 
     if (c1.isHorizontal(c2)) {
-
+      System.out.println("Horizontal ship");
       if (c1.getX() < c2.getX()) {
         startPoint = c1.getX();
       }
@@ -71,12 +71,16 @@ public class Coord {
 
       for (int i = 1; i < cList.length - 1; i++) {
         cList[i] = new Coord(startPoint + i, c1.getY());
+
+
+
+
       }
     }
 
     //fills in blanks for vertical ships
     else {
-      
+      System.out.println("Vertical ship");   
       if (c1.getY() < c2.getY()) {
         startPoint = c1.getY();
       }
@@ -88,7 +92,10 @@ public class Coord {
       }
 
     }
-    
+    System.out.println("Coordinate list is ");
+    for (Coord c : cList) {
+      System.out.println(c);
+    }
     return cList;
   }
 

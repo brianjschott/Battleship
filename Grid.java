@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 public class Grid {
+  //a Grid stores board, a 2D array of Tiles
   private Tile[][] board;
   private int rows, cols;
 
@@ -11,6 +12,7 @@ public class Grid {
     this.initializeBoard();
   }
 
+  //creates Tile objects at each space on the board
   public void initializeBoard() {
     for (int i = 0; i < board.length; i++) {
       for (int j = 0; j < board[i].length; j++) {
@@ -19,6 +21,8 @@ public class Grid {
     }
   }
 
+  //calls resetTile on all spaces
+  //used at the end of a game to restart
   public void resetBoard() {
     for (int i = 0; i < board.length; i++) {
       for (int j = 0; j < board[i].length; j++) {
@@ -28,13 +32,43 @@ public class Grid {
     }
   }
 
-  public void viewBoard() {
+  //@param: true if it's the opponent's view ("the guess board") and false if not
+  //displays all grid spaces and adds tabs between them
+  public void viewBoard(boolean isGuessGrid) {
+
+    char columnLetter = 'A';
+
+    //prints out column letters
+    System.out.print("\t");
+
     for (int i = 0; i < board.length; i++) {
+      System.out.print((char)(columnLetter + i));
+      System.out.print("\t");
+    }
+
+    System.out.println();
+    System.out.println();
+    
+    for (int i = 0; i < board.length; i++) {
+      //prints row number then the rest of row
+      System.out.print("" + i + "\t");
       for (int j = 0; j < board[i].length; j++) {
-        System.out.print(board[i][j] + "\t");
+        
+        System.out.print(board[i][j].toIcon(isGuessGrid) + "\t");
       }
     System.out.println();
     System.out.println();
+    }
+  }
+
+
+  //@param: the current ship list
+  //updates the Ship references so each Tile knows what ship (if any) is there
+  public void updateBoard(ArrayList<Ship> shipList) {
+    for (Ship s: shipList) {
+      for (Coord c: s.getCoordList()) {
+        this.board[c.getY()][c.getX()].setShipPresent(s);
+      }
     }
   }
 
@@ -65,7 +99,7 @@ public class Grid {
       int x = c1.getX();
       int y = c1.getY();
 
-      if (x < 0 || x > this.cols || y < 0 || y < this.rows) {
+      if (x < 0 || x > this.cols || y < 0 || y > this.rows) {
         System.out.println("Not placed on grid correctly");
         return false;
       }
