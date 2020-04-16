@@ -71,4 +71,17 @@ public class Ship {
   public String toString() {
     return this.shipIcon;
   }
+
+  public String getShipType() {
+    return this.shipType.name();
+  }
+
+  public void takeAHit() {
+    this.shipHealth -= 1;
+  }
+
+  public boolean isStillFloating() {
+    if (this.shipHealth > 0 ) { return true;}
+    return false;
+  }
 }

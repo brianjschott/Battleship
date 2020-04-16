@@ -109,4 +109,8 @@ public class Grid {
 
   }
 
+  public Tile[][] getBoard() {
+    return this.board;
+  }
+
 }

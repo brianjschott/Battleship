@@ -39,7 +39,34 @@ public class Tile {
     this.isBlasted = false;
   }
 
+  public Ship getShipPresent() {
+    return this.shipPresent;
+  }
+
   public void setShipPresent(Ship s) {
     shipPresent = s;
   }
+
+  public boolean isShipPresent() {
+    if (shipPresent != null) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  public Coord getTileCoord() {
+    return this.tileCoord;
+  }
+
+  public void setIsBlasted(boolean b) {
+    this.isBlasted = b;
+  }
+
+  public boolean getIsBlasted() {
+    return this.isBlasted;
+  }
+
+
 }

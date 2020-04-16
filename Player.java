@@ -21,6 +21,8 @@ public class Player {
 
   }
 
+  //@param: a Player object
+  //creates a reference to the opposing Player object
   public void setOpponent(Player o) {
     this.opponent = o;
   }
@@ -119,4 +121,12 @@ public class Player {
 
   }
 
+  public boolean anyShipsStanding() {
+    for (Ship s : this.myShipList) {
+      if (s.isStillFloating()) {
+        return true;
+      }
+    }
+    return false;
+  }
 }
