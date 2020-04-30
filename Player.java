@@ -35,6 +35,14 @@ public class Player {
     return myGrid;
   }
 
+  //draws player's side of the board
+  public void drawSideOfBoard() {
+    System.out.println("Your Grid: ");
+    this.getGrid().viewBoard(false);
+    System.out.println("Opponent's Grid: ");
+    this.getOpponent().getGrid().viewBoard(true);
+  }
+
   public void placeInitialShips() {
     
     System.out.println(this.playerName + ", please place your ships.");
@@ -62,13 +70,13 @@ public class Player {
 
         //user inputs column and row values, they're converted to start/end x values
         System.out.print("Enter a column coordinate of start of ship: ");
-        startX = Tile.convertColumnLetter(kb.next().charAt(0));
+        startX = Tile.convertColumnLetter(kb.next().toUpperCase().charAt(0));
 
         System.out.print("Enter a row coordinate of start: ");
         startY = kb.nextInt();
 
         System.out.print("Enter a column coordinate of end of ship: ");
-        endX = Tile.convertColumnLetter(kb.next().charAt(0));
+        endX = Tile.convertColumnLetter(kb.next().toUpperCase().charAt(0));
 
         System.out.print("Enter a row coordinate of end: ");
         endY = kb.nextInt();

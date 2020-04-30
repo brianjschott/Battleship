@@ -9,16 +9,18 @@ public class GameController {
 
   public void warnPlayer() {
     Scanner kb = new Scanner(System.in);
-    System.out.println("Next player's turn! Please switch and press Space twice when ready.");
-    kb.next();
-    kb.next();
+    System.out.println("Next player's turn! Please switch and press Enter when ready.");
+    try {
+      System.in.read();
+    }
+    catch(Exception e) {
+      System.out.println("Error getting input from user");
+    }
     clearScreen();
   }
 
   public Player getNextPlayer() {
-
     warnPlayer();
-
     if (currentPlayerNum == playerList.length - 1) {
       currentPlayerNum = 0;
     } else {
@@ -57,14 +59,17 @@ public class GameController {
     Scanner kb = new Scanner(System.in);
     // main game loop
     do {
+      System.out.println("Current player: " + currentPlayer.getPlayerName());
+
+      currentPlayer.drawSideOfBoard();
 
       // player chooses coordinates
       System.out.print("Enter a column coordinate to blast ");
-      int col = Tile.convertColumnLetter(kb.next().charAt(0));
+      int col = Tile.convertColumnLetter(kb.next().toUpperCase().charAt(0));
 
       System.out.print("Enter a row coordinate to blast: ");
       int row = kb.nextInt();
-      //add input validation for the above code
+      //TODO: add input validation for the above code
 
 
       Tile targetTile = currentPlayer.getOpponent().getGrid().getBoard()[row][col];
